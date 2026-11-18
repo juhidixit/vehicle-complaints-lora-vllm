@@ -1,0 +1,294 @@
+{
+ "n": 2000,
+ "macro_f1": 0.8657001833100212,
+ "macro_f1_ci95": [
+  0.8462006487149932,
+  0.8831684030576775
+ ],
+ "accuracy": 0.8815,
+ "accuracy_ci95": [
+  0.8664875000000001,
+  0.895
+ ],
+ "invalid_rate": 0.0,
+ "per_class": {
+  "AIR BAGS": {
+   "f1": 0.8489795918367347,
+   "precision": 0.7761194029850746,
+   "recall": 0.9369369369369369,
+   "support": 111
+  },
+  "ELECTRICAL SYSTEM": {
+   "f1": 0.8,
+   "precision": 0.8477366255144033,
+   "recall": 0.7573529411764706,
+   "support": 272
+  },
+  "ENGINE": {
+   "f1": 0.9059360730593607,
+   "precision": 0.9051094890510949,
+   "recall": 0.906764168190128,
+   "support": 547
+  },
+  "EXTERIOR LIGHTING": {
+   "f1": 0.9298245614035088,
+   "precision": 0.9298245614035088,
+   "recall": 0.9298245614035088,
+   "support": 57
+  },
+  "FUEL/PROPULSION SYSTEM": {
+   "f1": 0.7861271676300579,
+   "precision": 0.8395061728395061,
+   "recall": 0.7391304347826086,
+   "support": 92
+  },
+  "POWER TRAIN": {
+   "f1": 0.8880407124681934,
+   "precision": 0.8790931989924433,
+   "recall": 0.897172236503856,
+   "support": 389
+  },
+  "SERVICE BRAKES": {
+   "f1": 0.9375,
+   "precision": 0.9507042253521126,
+   "recall": 0.9246575342465754,
+   "support": 146
+  },
+  "STEERING": {
+   "f1": 0.9542168674698795,
+   "precision": 0.9565217391304348,
+   "recall": 0.9519230769230769,
+   "support": 208
+  },
+  "STRUCTURE": {
+   "f1": 0.8621908127208481,
+   "precision": 0.8299319727891157,
+   "recall": 0.8970588235294118,
+   "support": 136
+  },
+  "SUSPENSION": {
+   "f1": 0.7441860465116279,
+   "precision": 0.7272727272727273,
+   "recall": 0.7619047619047619,
+   "support": 42
+  }
+ },
+ "confusion_matrix": {
+  "labels": [
+   "AIR BAGS",
+   "ELECTRICAL SYSTEM",
+   "ENGINE",
+   "EXTERIOR LIGHTING",
+   "FUEL/PROPULSION SYSTEM",
+   "POWER TRAIN",
+   "SERVICE BRAKES",
+   "STEERING",
+   "STRUCTURE",
+   "SUSPENSION"
+  ],
+  "columns": [
+   "AIR BAGS",
+   "ELECTRICAL SYSTEM",
+   "ENGINE",
+   "EXTERIOR LIGHTING",
+   "FUEL/PROPULSION SYSTEM",
+   "POWER TRAIN",
+   "SERVICE BRAKES",
+   "STEERING",
+   "STRUCTURE",
+   "SUSPENSION",
+   "__INVALID__"
+  ],
+  "matrix": [
+   [
+    104,
+    3,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    2,
+    0,
+    0
+   ],
+   [
+    7,
+    206,
+    20,
+    2,
+    1,
+    12,
+    3,
+    4,
+    17,
+    0,
+    0
+   ],
+   [
+    7,
+    13,
+    496,
+    0,
+    6,
+    22,
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    2,
+    0,
+    53,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    1,
+    6,
+    9,
+    0,
+    68,
+    8,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    2,
+    10,
+    18,
+    0,
+    2,
+    349,
+    2,
+    1,
+    2,
+    3,
+    0
+   ],
+   [
+    7,
+    0,
+    0,
+    1,
+    0,
+    1,
+    135,
+    0,
+    1,
+    1,
+    0
+   ],
+   [
+    0,
+    2,
+    1,
+    0,
+    0,
+    2,
+    0,
+    198,
+    0,
+    5,
+    0
+   ],
+   [
+    6,
+    1,
+    1,
+    1,
+    2,
+    0,
+    0,
+    0,
+    122,
+    3,
+    0
+   ],
+   [
+    0,
+    0,
+    3,
+    0,
+    1,
+    1,
+    0,
+    3,
+    2,
+    32,
+    0
+   ]
+  ]
+ },
+ "system": "tfidf_logreg",
+ "split": "test_timeshift",
+ "family": "baseline",
+ "params": {
+  "C": 16.0,
+  "class_weight": "balanced",
+  "ngram_range": [
+   1,
+   2
+  ],
+  "min_df": 2,
+  "max_features": 200000
+ },
+ "val_search": [
+  {
+   "C": 1.0,
+   "class_weight": null,
+   "val_macro_f1": 0.8613428177201777
+  },
+  {
+   "C": 1.0,
+   "class_weight": "balanced",
+   "val_macro_f1": 0.8762329984273277
+  },
+  {
+   "C": 4.0,
+   "class_weight": null,
+   "val_macro_f1": 0.8728811922877749
+  },
+  {
+   "C": 4.0,
+   "class_weight": "balanced",
+   "val_macro_f1": 0.878597943057027
+  },
+  {
+   "C": 16.0,
+   "class_weight": null,
+   "val_macro_f1": 0.8730293974982564
+  },
+  {
+   "C": 16.0,
+   "class_weight": "balanced",
+   "val_macro_f1": 0.8812003926829327
+  }
+ ],
+ "fit_seconds_incl_search": 148.464364831,
+ "inference_seconds": 0.23896690999998782,
+ "classifications_per_second": 8369.359590414011,
+ "environment": {
+  "python": "3.12.16",
+  "platform": "Linux-7.0.0-1019-azure-x86_64-with-glibc2.43",
+  "cpu": "x86_64",
+  "cpu_count": 4,
+  "packages": {
+   "scikit-learn": "1.9.1"
+  },
+  "date_utc": "2026-11-18",
+  "gpus": []
+ }
+}

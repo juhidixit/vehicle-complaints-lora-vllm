@@ -1,0 +1,157 @@
+{
+ "source": {
+  "url": "https://static.nhtsa.gov/odi/ffdd/cmpl/FLAT_CMPL.zip",
+  "bytes": 376976521,
+  "sha256": "e1009ea448bd2cc9d35d4a2983cf2665b71937902255631aa2fadb685dd3abf6",
+  "last_modified": "Wed, 18 Nov 2026 10:15:32 GMT",
+  "downloaded_at_utc": "2026-11-18T19:42:01Z",
+  "layout_fields_checked": 51
+ },
+ "latest_received_date": "20261116",
+ "pool_years": [
+  2015,
+  2024
+ ],
+ "timeshift_year": 2025,
+ "labels": [
+  "AIR BAGS",
+  "ELECTRICAL SYSTEM",
+  "ENGINE",
+  "EXTERIOR LIGHTING",
+  "FUEL/PROPULSION SYSTEM",
+  "POWER TRAIN",
+  "SERVICE BRAKES",
+  "STEERING",
+  "STRUCTURE",
+  "SUSPENSION"
+ ],
+ "excluded_components": [
+  "UNKNOWN OR OTHER"
+ ],
+ "min_words": 20,
+ "seed": 13,
+ "funnel": {
+  "lines": 2267990,
+  "complaints_in_date_range": 1080839,
+  "pool_dropped_multi_or_unknown_component": 221085,
+  "pool_dropped_short": 35848,
+  "pool_dropped_duplicate_text": 3344,
+  "pool_dropped_duplicate_text_conflicting_label": 87,
+  "pool_kept": 390915,
+  "timeshift_dropped_multi_or_unknown_component": 29103,
+  "timeshift_dropped_short": 4168,
+  "timeshift_dropped_duplicate_text": 328,
+  "timeshift_kept": 40771,
+  "pool_top10_available": 325559,
+  "timeshift_top10_available": 31163
+ },
+ "splits": {
+  "train": {
+   "n": 20000,
+   "labels": {
+    "AIR BAGS": 3783,
+    "ENGINE": 3283,
+    "POWER TRAIN": 2673,
+    "ELECTRICAL SYSTEM": 2467,
+    "STEERING": 2264,
+    "SERVICE BRAKES": 1573,
+    "STRUCTURE": 1298,
+    "FUEL/PROPULSION SYSTEM": 1155,
+    "EXTERIOR LIGHTING": 816,
+    "SUSPENSION": 688
+   },
+   "words_median": 80.0,
+   "words_p95": 238,
+   "received_years": {
+    "2015": 2633,
+    "2016": 2580,
+    "2017": 2398,
+    "2018": 2062,
+    "2019": 2372,
+    "2020": 1699,
+    "2021": 1406,
+    "2022": 1353,
+    "2023": 1715,
+    "2024": 1782
+   }
+  },
+  "val": {
+   "n": 2000,
+   "labels": {
+    "AIR BAGS": 379,
+    "ENGINE": 328,
+    "POWER TRAIN": 267,
+    "ELECTRICAL SYSTEM": 247,
+    "STEERING": 226,
+    "SERVICE BRAKES": 157,
+    "STRUCTURE": 129,
+    "FUEL/PROPULSION SYSTEM": 116,
+    "EXTERIOR LIGHTING": 82,
+    "SUSPENSION": 69
+   },
+   "words_median": 79.0,
+   "words_p95": 244,
+   "received_years": {
+    "2015": 287,
+    "2016": 247,
+    "2017": 247,
+    "2018": 202,
+    "2019": 247,
+    "2020": 157,
+    "2021": 142,
+    "2022": 133,
+    "2023": 164,
+    "2024": 174
+   }
+  },
+  "test": {
+   "n": 2000,
+   "labels": {
+    "AIR BAGS": 378,
+    "ENGINE": 328,
+    "POWER TRAIN": 268,
+    "ELECTRICAL SYSTEM": 246,
+    "STEERING": 227,
+    "SERVICE BRAKES": 158,
+    "STRUCTURE": 130,
+    "FUEL/PROPULSION SYSTEM": 115,
+    "EXTERIOR LIGHTING": 81,
+    "SUSPENSION": 69
+   },
+   "words_median": 81.0,
+   "words_p95": 227,
+   "received_years": {
+    "2015": 280,
+    "2016": 254,
+    "2017": 261,
+    "2018": 186,
+    "2019": 248,
+    "2020": 171,
+    "2021": 157,
+    "2022": 118,
+    "2023": 170,
+    "2024": 155
+   }
+  },
+  "test_timeshift": {
+   "n": 2000,
+   "labels": {
+    "ENGINE": 547,
+    "POWER TRAIN": 389,
+    "ELECTRICAL SYSTEM": 272,
+    "STEERING": 208,
+    "SERVICE BRAKES": 146,
+    "STRUCTURE": 136,
+    "AIR BAGS": 111,
+    "FUEL/PROPULSION SYSTEM": 92,
+    "EXTERIOR LIGHTING": 57,
+    "SUSPENSION": 42
+   },
+   "words_median": 96.0,
+   "words_p95": 283,
+   "received_years": {
+    "2025": 2000
+   }
+  }
+ }
+}

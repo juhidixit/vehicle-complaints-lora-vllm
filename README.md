@@ -51,7 +51,27 @@ How the splits are built ([`data/build_splits.py`](data/build_splits.py)):
    with that year's own label mix.
 
 <!-- BEGIN:data -->
-_Not run yet._
+Source: `https://static.nhtsa.gov/odi/ffdd/cmpl/FLAT_CMPL.zip`, downloaded 2026-11-18T19:42:01Z (server Last-Modified: Wed, 18 Nov 2026 10:15:32 GMT, SHA-256 `e1009ea448bd2cc9…`). Latest complaint received: 20261116.
+
+- Main pool: complaints received 2015–2024. Time-shift test: complaints received in 2025.
+- Flat-file lines read: 2,267,990; complaints in the date window: 1,080,839.
+- Pool after filters: 390,915 complaints (dropped: 221,085 with several top-level components or only UNKNOWN OR OTHER, 35,848 under 20 words, 3,344 exact-text duplicates, 87 duplicates with conflicting labels). 325,559 of them are in the 10 most frequent components.
+- Time-shift year after filters: 40,771 complaints, 31,163 in the 10 labels.
+
+| Component (label) | train | val | test | test_timeshift |
+|---|---|---|---|---|
+| AIR BAGS | 3,783 | 379 | 378 | 111 |
+| ELECTRICAL SYSTEM | 2,467 | 247 | 246 | 272 |
+| ENGINE | 3,283 | 328 | 328 | 547 |
+| EXTERIOR LIGHTING | 816 | 82 | 81 | 57 |
+| FUEL/PROPULSION SYSTEM | 1,155 | 116 | 115 | 92 |
+| POWER TRAIN | 2,673 | 267 | 268 | 389 |
+| SERVICE BRAKES | 1,573 | 157 | 158 | 146 |
+| STEERING | 2,264 | 226 | 227 | 208 |
+| STRUCTURE | 1,298 | 129 | 130 | 136 |
+| SUSPENSION | 688 | 69 | 69 | 42 |
+| **Total** | **20,000** | **2,000** | **2,000** | **2,000** |
+| Median / p95 words | 80 / 238 | 79 / 244 | 81 / 227 | 96 / 283 |
 <!-- END:data -->
 
 ## Systems compared
@@ -77,7 +97,10 @@ loss on the answer tokens only (TRL prompt-completion format).
 ## Results
 
 <!-- BEGIN:results -->
-_Not run yet._
+| System | Macro-F1 test (95% CI) | Accuracy | Unparseable | Macro-F1 time-shift (95% CI) | Accuracy | Unparseable |
+|---|---|---|---|---|---|---|
+| Majority class | 0.032 (0.029–0.034) | 18.9% | 0.0% | 0.011 (0.009–0.012) | 5.5% | 0.0% |
+| TF-IDF + logistic regression | 0.880 (0.864–0.895) | 89.2% | 0.0% | 0.866 (0.846–0.883) | 88.1% | 0.0% |
 <!-- END:results -->
 
 Paired bootstrap on the same test examples (is the difference real?):
@@ -89,7 +112,18 @@ _Not run yet._
 Per-class F1 on the main test set:
 
 <!-- BEGIN:per_class -->
-_Not run yet._
+| Component | Test support | TF-IDF + logistic regression |
+|---|---|---|
+| AIR BAGS | 378 | 0.972 |
+| ELECTRICAL SYSTEM | 246 | 0.822 |
+| ENGINE | 328 | 0.860 |
+| EXTERIOR LIGHTING | 81 | 0.880 |
+| FUEL/PROPULSION SYSTEM | 115 | 0.839 |
+| POWER TRAIN | 268 | 0.877 |
+| SERVICE BRAKES | 158 | 0.940 |
+| STEERING | 227 | 0.948 |
+| STRUCTURE | 130 | 0.833 |
+| SUSPENSION | 69 | 0.833 |
 <!-- END:per_class -->
 
 Training runs:
@@ -134,7 +168,9 @@ _To be written from the runs. Nothing here yet._
 ## Hardware and versions
 
 <!-- BEGIN:env -->
-_Not run yet._
+| Hardware | Python | Packages | Date | First seen in |
+|---|---|---|---|---|
+| CPU only (4 cores) | 3.12.16 | scikit-learn 1.9.1 | 2026-11-18 | metrics/majority__test |
 <!-- END:env -->
 
 ## Reproduce
