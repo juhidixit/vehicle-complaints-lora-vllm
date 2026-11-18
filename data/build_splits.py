@@ -68,7 +68,7 @@ def main() -> None:
     sizes = dict(zip(SIZES, args.sizes[:3], strict=True))
     timeshift_size = args.sizes[3]
     stats: Counter = Counter()
-    complaints = group_complaints(iter_flat_lines(args.flat), "20000101", "29991231", stats)
+    complaints = group_complaints(iter_flat_lines(args.flat), "20100101", "29991231", stats)  # pool starts later
     max_date = max(c.datea for c in complaints.values())
     full_year = latest_full_year(max_date)
     pool_lo, pool_hi = full_year - POOL_YEARS, full_year - 1
