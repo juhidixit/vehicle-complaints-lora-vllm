@@ -45,23 +45,33 @@ MIN_WORDS = 20
 
 
 def verify_layout(layout_text: str) -> list[str]:
-    """Check that the field names in NHTSA's layout document appear in our order.
+    """Check our field order against NHTSA's layout document (CMPL.txt).
 
-    Returns the list of field names found in the document (in document order). Raises
-    ``ValueError`` if the order differs from ``FLAT_FIELDS`` for the fields the document lists.
+    If the document numbers its fields ("1  CMPLID ..."), each documented number must match our
+    position. Otherwise our field list must appear in the document as an ordered subsequence
+    (names can also be mentioned earlier in prose, which a first-mention check would trip on).
+    Returns the documented field names in our order; raises ``ValueError`` on a mismatch.
     """
     wanted = set(FLAT_FIELDS)
-    found: list[str] = []
-    for token in re.findall(r"\b[A-Z][A-Z0-9_]{2,}\b", layout_text):
-        if token in wanted and token not in found:
-            found.append(token)
+    numbered: dict[str, int] = {}
+    for m in re.finditer(r"^\s*(\d{1,2})\s*[.:)]?\s+([A-Z][A-Z0-9_]+)\b", layout_text, re.M):
+        if m.group(2) in wanted and m.group(2) not in numbered:
+            numbered[m.group(2)] = int(m.group(1))
     for col in ("ODINO", "COMPDESC", "DATEA", "CDESCR"):
-        if col not in found:
+        if col not in layout_text:
             raise ValueError(f"layout document does not mention {col}; check the NHTSA layout")
-    expected = [f for f in FLAT_FIELDS if f in found]
-    if found != expected:
-        raise ValueError(f"field order differs from the layout document:\n doc: {found}\n ours: {expected}")
-    return found
+    if len(numbered) >= 20:
+        wrong = {k: v for k, v in numbered.items() if v != IDX[k] + 1}
+        if wrong:
+            raise ValueError(f"field numbers differ from ours (doc number vs ours): "
+                             f"{ {k: (v, IDX[k] + 1) for k, v in wrong.items()} }")
+        return [f for f in FLAT_FIELDS if f in numbered]
+    tokens = [t for t in re.findall(r"\b[A-Z][A-Z0-9_]{2,}\b", layout_text) if t in wanted]
+    it = iter(tokens)
+    documented = [f for f in FLAT_FIELDS if f in tokens]
+    if not all(any(t == f for t in it) for f in documented):
+        raise ValueError(f"field order differs from the layout document: {tokens}")
+    return documented
 
 
 def top_level(compdesc: str) -> str:

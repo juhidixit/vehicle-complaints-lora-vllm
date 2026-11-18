@@ -28,6 +28,11 @@ def test_verify_layout_accepts_documented_order_and_rejects_swaps():
     swapped = doc.replace("COMPDESC", "TMP").replace("CDESCR", "COMPDESC").replace("TMP", "CDESCR")
     with pytest.raises(ValueError):
         verify_layout(swapped)
+    # an early mention in prose (e.g. "sorted by LDATE") must not count as a reordering
+    prose = "File is sorted by LDATE. " + " ".join(FLAT_FIELDS)
+    assert verify_layout(prose) == FLAT_FIELDS
+    with pytest.raises(ValueError):
+        verify_layout(" ".join(reversed(FLAT_FIELDS)))
 
 
 def test_stratified_sample_keeps_proportions():
