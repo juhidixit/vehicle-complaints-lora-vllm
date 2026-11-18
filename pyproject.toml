@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vclora"
+version = "0.1.0"
+description = "QLoRA fine-tuning vs baselines on NHTSA vehicle complaints, and an HF vs vLLM serving benchmark"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "scikit-learn>=1.5",
+  "pyyaml>=6",
+  "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+llm = [
+  "torch>=2.4",
+  "transformers>=5.0",
+  "peft>=0.15",
+  "trl>=1.0",
+  "datasets>=3.0",
+  "accelerate>=1.0",
+]
+gpu = [
+  "vclora[llm]",
+  "bitsandbytes>=0.45",
+  "vllm==0.34.0",
+  "nvidia-ml-py>=12",
+]
+# LLM Compressor pins a different compressed-tensors and torch than vLLM 0.34, so the GPTQ step
+# runs in its own virtual environment (see `make quantize`).
+quant = ["vclora[llm]", "llmcompressor==0.15.0"]
+dev = ["pytest>=8", "ruff==0.8.4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+extend-exclude = ["notebooks"]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

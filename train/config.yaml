@@ -1,0 +1,24 @@
+# QLoRA settings used for every reported run. Change them here, not on the command line,
+# so the committed config is the one the results came from.
+base_model: Qwen/Qwen2.5-1.5B-Instruct
+quantization:
+  load_in_4bit: true
+  bnb_4bit_quant_type: nf4
+  bnb_4bit_use_double_quant: true
+lora:
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  target_modules: all-linear
+training:
+  num_train_epochs: 2
+  learning_rate: 2.0e-4
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.03
+  per_device_train_batch_size: 8
+  gradient_accumulation_steps: 2   # effective batch 16
+  max_length: 512
+  optim: paged_adamw_8bit
+  gradient_checkpointing: true
+  logging_steps: 25
+seeds: [0]   # add 1 and 2 if the GPU budget allows; the README reports how many were run

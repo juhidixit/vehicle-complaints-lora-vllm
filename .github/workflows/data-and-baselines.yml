@@ -1,0 +1,46 @@
+# Downloads the NHTSA complaints file, builds the splits and runs the CPU baselines on a
+# GitHub-hosted runner, then pushes the results to a branch for review. Nothing secret is used.
+name: data-and-baselines
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "fresh = new splits from today's file; from-ids = rebuild the committed splits"
+        type: choice
+        options: [fresh, from-ids]
+        default: fresh
+permissions:
+  contents: write
+concurrency:
+  group: data-and-baselines
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - name: Data
+        run: |
+          if [ "${{ inputs.mode }}" = "fresh" ]; then make data; else make data-from-ids; fi
+      - name: CPU baselines
+        run: make baselines
+      - name: Report
+        run: make report
+      - name: Show runner hardware
+        run: lscpu | head -20; free -g
+      - name: Push results to a branch
+        run: |
+          branch="results/data-baselines-${{ github.run_id }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add results data/splits README.md
+          git commit -m "Data splits and CPU baselines (run ${{ github.run_id }}, mode ${{ inputs.mode }})"
+          git push origin "$branch"
+          echo "Pushed $branch" >> "$GITHUB_STEP_SUMMARY"

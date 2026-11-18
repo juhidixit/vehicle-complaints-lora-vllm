@@ -1,0 +1,12 @@
+# Hourly prices used to turn measured throughput into cost per 1,000 classifications.
+# These are inputs, not measurements: fill them in with the price you actually paid (or the
+# on-demand list price on the day of the run) and its source. The report prints them next to
+# every cost number.
+gpu:
+  name: null            # e.g. "NVIDIA L4 (RunPod community cloud)"
+  usd_per_hour: null    # e.g. 0.43
+  source: null          # e.g. "runpod.io/pricing, checked 2026-11-20"
+cpu:
+  name: "4 vCPU general-purpose VM (GitHub-hosted runner class)"
+  usd_per_hour: null
+  source: null
